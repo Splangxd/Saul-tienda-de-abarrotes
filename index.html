@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Programacion II</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/css/bootstrap.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.10.1/bootstrap-table.min.css"
+    />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.10.1/bootstrap-table.min.js"></script>
+    <style>
+      #misdatos {
+        text-align: center;
+        padding-bottom: 10px;
+      }
+      #precio-final {
+        text-align: right;
+        right: 13rem;
+        padding: 4px;
+        position: relative;
+      }
+      body {
+        background-color: whitesmoke
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Elementos de HTML-->
+    <div id="misdatos">
+      <h1>Tienda de abarrotes</h1>
+    </div>
+    <hr />
+
+    <div id="misdatos">
+      <button onclick="refresco()">Refresco</button>
+      <button onclick="escoba()">Escoba</button>
+      <button onclick="recogedor()">Recogedor</button>
+      <button onclick="sprite()">Sprite</button>
+      <button onclick="harpic()">Harpic</button>
+    </div>
+
+    <div class="container">
+      <table id="tabla" data-height="360" data-auto-refresh="true">
+        <thead>
+          <tr>
+            <th data-field="Nombre">Nombre</th>
+            <th data-field="Categoría">Categoría</th>
+            <th data-field="precio">precio</th>
+            <th data-field="imagen">imagen</th>
+          </tr>
+        </thead>
+      </table>
+    </div>
+
+    <div id="precio-final">
+      <button onclick="opciones()">Finalizar</button>
+    </div>
+
+    <hr />
+    <div id="misdatos">
+      <h3> |Saúl Alberto Bermúdez Almaraz saul.bermudez2929@alumnos.udg.mx |</h3>
+      </h3>|Preparatoria San José del Valle | Programación web | Angel Emmanuel Sanchez Cuenca </h3>
+      <h3> Copyright © Todos los derechos reservados</h3>
+    </div>
+  </body>
+  <script>
+    /* Javascript */
+    $(function () {
+      $("#tabla").bootstrapTable({
+        data: datos,
+        formatNoMatches: function () {
+          return "No hay datos";
+        },
+      });
+    });
+
+    var datos = [];
+    var precio = 0;
+    $("#precio_final").append(precio);
+
+    function muestraDatos() {
+      $("#tabla").bootstrapTable("load", datos);
+    }
+
+    function opciones() {
+      var opcion = Number(
+        prompt(
+          "Ingresa una opcion: \n1) Borrar articulos \n2) Finalizar compra"
+        )
+      );
+
+      // aqui abajo implementa un swtich para borrar articulos o finalizar compra
+      switch (opcion) {
+        case 1:
+          alert("Seleccionaste borrar artículos");
+          borraDatos();
+          break;
+        case 2:
+          alert("Seleccionaste finalizar la compra");
+          sumaArticulos();
+          break;
+        default:
+          alert("No seleccionaste ninguna opcion");
+          break;
+      }
+    }
+
+    function sumaArticulos() {
+      var precioFinal = 0;
+
+      for (i = 0; i < datos.length; i++) {
+        // importante que una propiedad de tu objeto se llame precio, de lo contrario cambiar
+        precioFinal = precioFinal + datos[i].precio;
+      }
+
+      alert("Pagaras $" + precioFinal);
+    }
+
+    function borraDatos() {
+      datos = [];
+      muestraDatos();
+    }
+
+    // Aqui abajo agrega tus funciones
+
+    function refresco() {
+      var refresco = {
+        Nombre: "Coca Cola",
+        Categoría: "Refrescos",
+        precio: 18,
+        imagen:'<img width="50" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQqkx2zYjqHNwM3P-5ZZrGkxUdkv8-DVvZNmrtQz_JcNA&s" >',
+      };
+      datos.push(refresco);
+      muestraDatos();
+    };
+    function escoba() {
+      var escoba = {
+        Nombre: "Escoba",
+        Categoría: "Limpieza",
+        precio: 40,
+        imagen:'<img width="50" src="https://gmgsuplidores.com/cdn/shop/products/Escoba_800x.png?v=1598410866" >',
+      };
+      datos.push(escoba);
+      muestraDatos();
+    };
+    function recogedor() {
+      var recogedor = {
+        Nombre: "Recogedor",
+        Categoría: "Limpieza",
+        precio: 53,
+        imagen:'<img width="50" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSdA4KE2WW_W6BNN_7dyRqzhB1OOSx1Z1ZdB6aoDgXn-w&s" >',
+      };
+      datos.push(recogedor);
+      muestraDatos();
+    };
+    function sprite() {
+        var sprite = {
+        Nombre: "Sprite",
+        Categoría: "Refresco",
+        precio: 16,
+        imagen:'<img width="50" src="https://burgerspotny.com/wp-content/uploads/sprite.png" >',
+       };
+       datos.push(sprite);
+      muestraDatos();  
+    };
+    function harpic() {
+      var harpic = {
+        Nombre: "Harpic",
+        Categoría: "Limpieza",
+        precio: 45,
+        imagen:'<img width="50" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRet-WCBZWUn_yPRl-ECip8kz5LCWgj_z23t95hWUKqZA&s" >',
+      };
+      datos.push(harpic);
+      muestraDatos();
+    };
+
+  </script>
+</html>
